@@ -1,4 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
 
 public class DocumentoFactoryTest {
@@ -22,4 +24,14 @@ public class DocumentoFactoryTest {
         assertEquals("Salvando um documento de planilha.", documentoDePlanilha.salvar());
         assertEquals("Fechando um documento de planilha.", documentoDePlanilha.fechar());
     }
+
+    @Test
+    public void testDocumentoDesconhecido() {
+        DocumentoFactory desconhecidaFactory = new DocumentoDesconhecidoFactory();
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Documento documentoDesconhecido = desconhecidaFactory.criarDocumento();
+        });
+    }
+
 }
